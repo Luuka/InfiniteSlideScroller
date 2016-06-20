@@ -1,0 +1,28 @@
+{
+  "name": "JQInfiniteImageScroller",
+  "version": "0.0.1",
+  "description": "Infinite image scroller slider",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-less": "^3.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-minify": "^0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luuka/SKIING.git"
+  },
+  "author": "Lucas Trebouet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luuka/SKIING/issues"
+  },
+  "homepage": "https://github.com/Luuka/SKIING#readme"
+}
