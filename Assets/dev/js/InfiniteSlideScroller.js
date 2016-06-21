@@ -1,6 +1,8 @@
-$.fn.JQInfiniteImageScroller = function($params) {
+$.fn.InfiniteSlideScroller = function($params) {
     var $slider = this;
     var $slides = this.find('li');
+
+    var slides = new Array();
 
     var speed = 5;
     var width = 200;
@@ -14,11 +16,12 @@ $.fn.JQInfiniteImageScroller = function($params) {
     }
 
     if($slider.is("ul")) {
-        $slider.addClass('jqiis-slider');
+        $slider.addClass('iss-slider');
         $slides.each(function(index, slide){
             var $slide = $(slide);
+            slides.push(slide);
             $slider.width(width).height(height);
-            $slide.addClass('jqiis-slide');
+            $slide.addClass('iss-slide');
 
             var newPos;
             if($slide.prev().length > 0) {
@@ -28,22 +31,20 @@ $.fn.JQInfiniteImageScroller = function($params) {
                 newPos = 0;
             }
 
-            $slide.css('left',newPos);
+            $slide.css('left', newPos);
         });
 
+        console.log(slides);
+
         setInterval(function(){
-            $('.jqiis-slide').each(function(){
+            $('.iss-slide').each(function(){
                 var newPos = parseFloat($(this).css('left'), 10) - speed;
 
                 if(parseInt($(this).position().left) <= parseInt($(this).width() * -1)) {
-                    var max = 0, $lastSlide;
-                    $slides.each(function() {
-                        if($(this).offset().left > max) {
-                            max = $(this).offset().left;
-                            $lastSlide = $(this);
-                        }
-                    });
-                    newPos = parseInt($lastSlide.css('left')) + parseInt($lastSlide.width()) + gutter;
+                    $lastSlide = $(slides[slides.length - 1]);
+                    newPos = parseInt($lastSlide.position().left) + parseInt($lastSlide.width()) + gutter;
+                    slides.push(slides.shift());
+                    console.log(slides);
                 }
 
                 $(this).css('left', newPos);

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InfiniteSlideScroller</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="./Assets/build/js/InfiniteSlideScroller.js"></script>
+    <link rel="stylesheet" href="./Assets/build/css/InfiniteSlideScroller.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300,600' rel='stylesheet' type='text/css'>
+    <style>
+        html, body {
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #c0392b;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bolder;
+            font-size: 45px;
+            margin: 25px 0 0 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin: 5px 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h2 + p {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            width: 75%;
+            margin: 20px auto;
+            line-height: 40px;
+        }
+
+        #scroller {
+            border-top: 10px solid white;
+            border-bottom: 10px solid white;
+        }
+
+        #scroller img {
+            height: 500px;
+        }
+
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .buttons a {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 50px;
+            line-height: 50px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            margin: 20px;
+
+            transition: .2s all ease;
+        }
+
+        .buttons a:hover {
+            color: #c0392b;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://github.com/Luuka/InfiniteSlideScroller"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+    <h1>InfiniteSlideScroller</h1>
+    <h2>lightweight JQuery infinite slide scroller plugin</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur quis repudiandae voluptatibus, nam dolorem rem hic, molestiae excepturi asperiores cum repellat magnam. Ut totam quaerat, laboriosam eos illo officiis consequuntur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae distinctio repellendus ex nemo at iste, similique necessitatibus harum explicabo temporibus. Voluptates ratione velit soluta minima fugit ad rem quia saepe.</p>
+    <ul id="scroller">
+        <li><a href="#"><img src="./demo/SKI2016-13-small.jpg" alt=""></a></li>
+        <li><a href="#"><img src="./demo/SKI2016-24-small.jpg" alt=""></a></li>
+        <li><a href="#"><img src="./demo/SKI2016-38-small.jpg" alt=""></a></li>
+        <li><a href="#"><img src="./demo/SKI2016-26-small.jpg" alt=""></a></li>
+        <li><a href="#"><img src="./demo/SKI2016-15-small.jpg" alt=""></a></li>
+    </ul>
+    <div class="buttons">
+        <a href="">Download</a> <a href="">Documentation</a>
+    </div>
+
+
+    <script type="text/javascript">
+    window.addEventListener('load', function(){
+        $('#scroller').InfiniteSlideScroller({
+            width: '100%',
+            height: '500px',
+            speed: 2,
+            gutter: 0
+        });
+    });
+    </script>
+</body>
+</html>
