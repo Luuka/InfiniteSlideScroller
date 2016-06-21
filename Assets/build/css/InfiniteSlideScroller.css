@@ -1,0 +1,15 @@
+.iss-slider {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+}
+.iss-slide {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
