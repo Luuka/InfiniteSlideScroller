@@ -1,58 +1,71 @@
-$.fn.InfiniteSlideScroller = function($params) {
-    var $slider = this;
-    var $slides = this.find('li');
+(function( $ ){
 
-    var slides = new Array();
+    var methods = {
+        init : function(options) {
+            var $slider = this;
+            var $slides = this.find('li');
 
-    var speed = 5;
-    var width = 200;
-    var height = 200;
-    var gutter = 0;
-    if($params != undefined) {
-        speed = $params.speed != undefined ? $params.speed : speed;
-        width = $params.width != undefined ? $params.width : width;
-        height = $params.height != undefined ? $params.height : height;
-        gutter = $params.gutter != undefined ? $params.gutter : gutter;
-    }
+            var slides = new Array();
 
-    if($slider.is("ul")) {
-        $slider.addClass('iss-slider');
-        $slides.each(function(index, slide){
-            var $slide = $(slide);
-            slides.push(slide);
-            $slider.width(width).height(height);
-            $slide.addClass('iss-slide');
+            var settings = $.extend({
+                speed: 5,
+                width: '200px',
+                height: '200px',
+                gutter: 0,
+            }, options );
 
-            var newPos;
-            if($slide.prev().length > 0) {
-                var $previousSlide = $slide.prev();
-                newPos = $previousSlide.position().left + $previousSlide.width() + gutter;
+            if($slider.is("ul")) {
+                $slider.addClass('iss-slider');
+                $slides.each(function(index, slide){
+                    var $slide = $(slide);
+                    slides.push(slide);
+                    $slider.width(settings.width).height(settings.height);
+                    $slide.addClass('iss-slide');
+
+                    var newPos;
+                    if($slide.prev().length > 0) {
+                        var $previousSlide = $slide.prev();
+                        newPos = $previousSlide.position().left + $previousSlide.width() + settings.gutter;
+                    } else {
+                        newPos = 0;
+                    }
+
+                    $slide.css('left', newPos);
+                });
+
+                setInterval(function(){
+                    $('.iss-slide').each(function(){
+                        var newPos = parseFloat($(this).css('left'), 10) - settings.speed;
+
+                        if(parseInt($(this).position().left) <= parseInt($(this).width() * -1)) {
+                            $lastSlide = $(slides[slides.length - 1]);
+                            newPos = parseInt($lastSlide.position().left) + parseInt($lastSlide.width()) + settings.gutter;
+                            slides.push(slides.shift());
+                        }
+
+                        $(this).css('left', newPos);
+                    });
+                }, 50);
+
             } else {
-                newPos = 0;
+                console.error("Bad type parameter : $slider must be an ul");
+                return false;
             }
+        },
+        show : function( ) {    },
+        hide : function( ) {  },
+        update : function( content ) {  }
+    };
 
-            $slide.css('left', newPos);
-        });
+    $.fn.InfiniteSlideScroller = function(methodOrOptions) {
+        if ( methods[methodOrOptions] ) {
+            return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.tooltip' );
+        }
+    };
 
-        console.log(slides);
 
-        setInterval(function(){
-            $('.iss-slide').each(function(){
-                var newPos = parseFloat($(this).css('left'), 10) - speed;
-
-                if(parseInt($(this).position().left) <= parseInt($(this).width() * -1)) {
-                    $lastSlide = $(slides[slides.length - 1]);
-                    newPos = parseInt($lastSlide.position().left) + parseInt($lastSlide.width()) + gutter;
-                    slides.push(slides.shift());
-                    console.log(slides);
-                }
-
-                $(this).css('left', newPos);
-            });
-        }, 50);
-
-    } else {
-        console.error("Bad type parameter : $slider must be an ul");
-        return false;
-    }
-};
+})( jQuery )
