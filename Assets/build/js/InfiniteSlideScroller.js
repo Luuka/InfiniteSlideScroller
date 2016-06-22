@@ -5,8 +5,8 @@ $.fn.InfiniteSlideScroller = function($params) {
     var slides = new Array();
 
     var speed = 5;
-    var width = 'auto';
-    var height = 'auto';
+    var width = 200;
+    var height = 200;
     var gutter = 0;
     if($params != undefined) {
         speed = $params.speed != undefined ? $params.speed : speed;
@@ -34,6 +34,8 @@ $.fn.InfiniteSlideScroller = function($params) {
             $slide.css('left', newPos);
         });
 
+        console.log(slides);
+
         setInterval(function(){
             $('.iss-slide').each(function(){
                 var newPos = parseFloat($(this).css('left'), 10) - speed;
@@ -42,6 +44,7 @@ $.fn.InfiniteSlideScroller = function($params) {
                     $lastSlide = $(slides[slides.length - 1]);
                     newPos = parseInt($lastSlide.position().left) + parseInt($lastSlide.width()) + gutter;
                     slides.push(slides.shift());
+                    console.log(slides);
                 }
 
                 $(this).css('left', newPos);
